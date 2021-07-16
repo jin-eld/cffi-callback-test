@@ -3,18 +3,14 @@
 #include <pthread.h>
 #include "cbtest.h"
 
-//extern PyMODINIT_FUNC PyInit_cb_test();
-
-extern void my_mod_init();
+/* implemented in ffibibuilder.set_source(), see build.py */
+extern int start_python_wrapper();
 
 int main()
 {
-    /*
-    pthread_t t;
-    pthread_create(&t, NULL, runner, NULL);
-*/
-
-    my_mod_init();
+    /* can't call cffi_start_python() directly, because it's being generated
+     * as a static function, see cffi-bindings.c */
+    start_python_wrapper();
 
     int i = 0;
 

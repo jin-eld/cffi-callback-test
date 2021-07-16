@@ -7,6 +7,7 @@ ffibuilder.cdef(
 typedef void (*cb_t)(int data);
 
 extern void register_cb(cb_t func);
+
 """)
 
 ffibuilder.embedding_api(r"""
@@ -36,6 +37,12 @@ lib.register_cb(lib.my_event_callback)
 
 """)
 
-ffibuilder.set_source("cb_test",'#include "cbtest.h"', sources=["cbtest.c"])
+ffibuilder.set_source("cb_test",r"""
+#include "cbtest.h"
+
+int start_python_wrapper() {
+    return cffi_start_python();
+}
+""", sources=["cbtest.c"])
 ffibuilder.emit_c_code("cffi-bindings.c")
 

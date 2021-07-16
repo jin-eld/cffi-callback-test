@@ -14,7 +14,7 @@ cbtest_LDADD = \
 
 noinst_LIBRARIES = libpycbtest.a
 
-EXTRA_DIST = build.py script.py
+EXTRA_DIST = build.py
 
 BUILT_SOURCES = cffi-bindings.c
 
