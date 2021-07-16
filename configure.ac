@@ -24,6 +24,22 @@ AC_ARG_ENABLE([debug],
     ]
 )
 
+SYSROOT=
+AC_ARG_WITH(sysroot,
+    AC_HELP_STRING([--with-sysroot=DIR],
+                   [search for dependencies in DIR]),
+    [
+        SYSROOT="$withval"
+    ]
+)
+if test -n "$SYSROOT"; then
+    CFLAGS="$CFLAGS -I$SYSROOT/include"
+    CPPFLAGS="$CPPFLAGS -I$SYSROOT/include"
+    LDFLAGS="$LDFLAGS -L$SYSROOT/lib"
+    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$SYSROOT/lib/pkgconfig
+    export PATH=$SYSROOT/bin:$PATH
+fi
+
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_RANLIB

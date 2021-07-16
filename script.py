@@ -5,10 +5,6 @@ import time
 #DO_CRASH = False
 DO_CRASH = True
 
-@ffi.def_extern()
-def my_event_callback(data):
-    print(f"Got callback in python script {data}")
-
 if __name__ == "__main__":
     lib.register_cb(lib.my_event_callback)
     # allows to get a few callbacks triggered without crashing
